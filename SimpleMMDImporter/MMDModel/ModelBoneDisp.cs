@@ -32,5 +32,10 @@ namespace SimpleMMDImporter.MMDModel
             BoneIndex = BitConverter.ToUInt16(reader.ReadBytes(2), 0);
             BoneDispFrameIndex = reader.ReadByte();
         }
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(BoneIndex + ",");
+            writer.Write(BoneDispFrameIndex + "\n");
+        }
     }
 }

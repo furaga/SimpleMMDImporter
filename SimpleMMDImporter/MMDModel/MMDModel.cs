@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 using WORD = System.UInt16;
 using DWORD = System.UInt32;
 
@@ -51,14 +53,14 @@ namespace SimpleMMDImporter.MMDModel
         public CoordinateType Coordinate { get; private set; }
         float CoordZ { get { return (float)Coordinate; } }
 
-        public MMDModel(string filepath, float scale)
+        public MMDModel(string inputPath, string outputPath, float scale)
         {
             Vertexes = null;
             EnglishExpantion = ToonExpantion = PhysicsExpantion = false;
             ToonFileNames = new List<string>();
             Coordinate = CoordinateType.LeftHandedCoordinate;
 
-            using (var fs =  new FileStream(filepath, FileMode.Open))
+            using (var fs = new FileStream(inputPath, FileMode.Open))
             {
                 var reader = new BinaryReader(fs);
                 Magic = MMDUtils.GetString(reader.ReadBytes(3));
@@ -76,9 +78,18 @@ namespace SimpleMMDImporter.MMDModel
                 {
                     Console.WriteLine("警告: ファイル末尾以降に不明データ?");
                 }
-            }
-        }
 
+            }
+
+            using (var fs = new FileStream(outputPath, FileMode.Create))
+            {
+                var writer = new StreamWriter(fs);
+                writer.WriteLine(Magic + "," + Version);
+                Write(writer);
+                writer.Close();
+            }
+
+        }
         public void Read(BinaryReader reader, CoordinateType coordinate, float scale)
         {
             Coordinate = coordinate;
@@ -87,7 +98,7 @@ namespace SimpleMMDImporter.MMDModel
             // 頂点リスト
             DWORD numVertex = BitConverter.ToUInt32(reader.ReadBytes(4), 0);
             Vertexes = new ModelVertex[numVertex];
-            for (DWORD i = 0; i < numVertex; i++)
+            for (DWORD i = 0; i < Vertexes.Length; i++)
             {
                 Vertexes[i] = new ModelVertex(reader, CoordZ, scale);
             }
@@ -108,6 +119,12 @@ namespace SimpleMMDImporter.MMDModel
             for (WORD i = 0; i < boneCount; i++)
             {
                 Bones[i] = new ModelBone(reader, CoordZ, scale);
+            }
+            WORD IKCount = BitConverter.ToUInt16(reader.ReadBytes(2), 0);
+            IKs = new ModelIK[IKCount];
+            for (WORD i = 0; i < IKs.Length; i++)
+            {
+                IKs[i] = new ModelIK(reader);
             }
             WORD skinCount = BitConverter.ToUInt16(reader.ReadBytes(2), 0);
             Skins = new ModelSkin[skinCount];
@@ -182,12 +199,53 @@ namespace SimpleMMDImporter.MMDModel
                     RigidBodies[i] = new ModelRigidBody(reader, CoordZ, scale);
                 }
                 DWORD jointCount = BitConverter.ToUInt32(reader.ReadBytes(4), 0);
-                Joints = new ModelJoint[rigidbodyCount];
+                Joints = new ModelJoint[jointCount];
                 for (int i = 0; i < Joints.Length; i++)
                 {
                     Joints[i] = new ModelJoint(reader, CoordZ, scale);
                 }
             }
+        }
+
+        public void Write(StreamWriter writer)
+        {
+            writer.WriteLine("\nヘッダ情報");
+            Header.Write(writer);
+            writer.WriteLine("\n\n頂点リスト," + Vertexes.Length);
+            writer.WriteLine("位置,,,法線,,,UV,,ボーンインデックス頂点リスト,,影響度,エッジフラグ");
+            foreach (var e in Vertexes) e.Write(writer);
+            writer.WriteLine("\n\n面リスト," + FaceVertexes.Length);
+            for (int i = 0; i < FaceVertexes.Length / 3; i++)
+            {
+                writer.Write(FaceVertexes[3 * i] + ",");
+                writer.Write(FaceVertexes[3 * i + 1] + ",");
+                writer.WriteLine(FaceVertexes[3 * i + 2]);
+            }
+            writer.WriteLine("\n\n材質リスト," + Materials.Length);
+            foreach (var e in Materials) e.Write(writer);
+            writer.WriteLine("\n\nボーンリスト," + Bones.Length);
+            foreach (var e in Bones) e.Write(writer);
+            writer.WriteLine("\n\nIKボーンリスト," + IKs.Length);
+            foreach (var e in IKs) e.Write(writer);
+            writer.WriteLine("\n\n表情リスト," + Skins.Length);
+            foreach (var e in Skins) e.Write(writer);
+            writer.WriteLine("\n\n表情枠用の表情番号リスト," + SkinIndex.Length);
+            foreach (var e in SkinIndex) writer.WriteLine(e + "");
+            writer.WriteLine("\n\nボーン枠用の枠名リスト," + BoneDispName.Length);
+            foreach (var e in BoneDispName) e.Write(writer);
+            writer.WriteLine("\n\nボーン枠用表示リスト," + BoneDisp.Length);
+            foreach (var e in BoneDisp) e.Write(writer);
+            writer.WriteLine("\n\n英語拡張, " + EnglishExpantion.ToString());
+            writer.WriteLine("\n\nトゥーン指定, " + ToonExpantion.ToString());
+            for (int i = 0; i < NumToonFileName; i++)
+            {
+                writer.WriteLine((i + 1) + "," + ToonFileNames[i]);
+            }
+            writer.WriteLine("\n\n物理演算拡張, " + PhysicsExpantion.ToString());
+            writer.WriteLine("\n剛体リスト, " + RigidBodies.Length);
+            foreach (var e in RigidBodies) e.Write(writer);
+            writer.WriteLine("\nジョイントリスト, " + Joints.Length);
+            foreach (var e in Joints) e.Write(writer);
         }
     }
 }

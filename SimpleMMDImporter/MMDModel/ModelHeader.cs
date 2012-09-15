@@ -30,5 +30,13 @@ namespace SimpleMMDImporter.MMDModel
             ModelNameEnglish = MMDUtils.GetString(reader.ReadBytes(20));
             CommentEnglish = MMDUtils.GetString(reader.ReadBytes(256));
         }
+
+        public void Write(StreamWriter writer)
+        {
+            writer.WriteLine("モデル名," + ModelName);
+            writer.WriteLine("コメント," + Comment.Replace("\n", "\n,"));
+            writer.WriteLine("モデル（英語）," + ModelNameEnglish);
+            writer.WriteLine("コメント（英語）," + (CommentEnglish == null ? "" : CommentEnglish.Replace("\n", "\n,")));
+        }
     }
 }

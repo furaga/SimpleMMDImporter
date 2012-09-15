@@ -64,5 +64,16 @@ namespace SimpleMMDImporter.MMDModel
         {
             BoneNameEnglish = MMDUtils.GetString(reader.ReadBytes(20));
         }
+
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(BoneName + ",");
+            writer.Write(ParentBoneIndex + ",");
+            writer.Write(TailPosBoneIndex + ",");
+            writer.Write(BoneType + ",");
+            writer.Write(IKParentBoneIndex + ",");
+            foreach (var e in BoneHeadPos) writer.Write(e + ",");
+            writer.Write(BoneNameEnglish + "\n");
+        }
     }
 }

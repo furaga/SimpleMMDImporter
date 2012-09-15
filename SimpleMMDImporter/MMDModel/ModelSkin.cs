@@ -30,6 +30,13 @@ namespace SimpleMMDImporter.MMDModel
             SkinVertPos[2] *= CoordZ;
 
         }
+
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(SkinVertIndex + ",");
+            foreach (var v in SkinVertPos) writer.Write(v + ",");
+            writer.WriteLine();
+        }
     }
 
     class ModelSkin
@@ -60,6 +67,14 @@ namespace SimpleMMDImporter.MMDModel
         public void ReadEnglishExpantion(BinaryReader reader)
         {
             SkinNameEnglish = MMDUtils.GetString(reader.ReadBytes(20));
+        }
+
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(SkinName + ",");
+            writer.Write(SkinType + ",");
+            writer.Write(SkinNameEnglish + "\n");
+            foreach (var e in SkinVertDatas) e.Write(writer);
         }
     }
 }

@@ -27,5 +27,10 @@ namespace SimpleMMDImporter.MMDModel
         {
             BoneDispNameEnglish = MMDUtils.GetString(reader.ReadBytes(50));
         }
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(BoneDispName + ",");
+            writer.Write(BoneDispNameEnglish + "\n");
+        }
     }
 }

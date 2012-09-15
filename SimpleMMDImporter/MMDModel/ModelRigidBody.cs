@@ -73,5 +73,22 @@ namespace SimpleMMDImporter.MMDModel
             Rotation[0] *= CoordZ;
             Rotation[1] *= CoordZ;
         }
+
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(RigidBodyName + ",");
+            writer.Write(RelateBoneIndex + ",");
+            writer.Write(GroupIndex + ",");
+            writer.Write(GroupTarget + ",");
+            writer.Write(ShapeType + ",");
+            writer.Write(ShapeWidth + ",");
+            writer.Write(ShapeHeight + ",");
+            writer.Write(ShapeDepth + ",");
+            foreach (var v in Position) writer.Write(v + ",");
+            foreach (var v in Rotation) writer.Write(v + ",");
+            writer.Write(Weight + ",");
+            writer.Write(LinerDamping + ",");
+            writer.Write(AngularDamping);
+        }
     }
 }

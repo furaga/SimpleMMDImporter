@@ -82,5 +82,21 @@ namespace SimpleMMDImporter.MMDModel
             ConstrainPosition1[2] *= CoordZ;
             ConstrainPosition2[2] *= CoordZ;
         }
+
+
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(Name + ",");
+            writer.Write(RigidBodyA + ",");
+            writer.Write(RigidBodyB + ",");
+            foreach (var e in Position) writer.Write(e + ",");
+            foreach (var e in Rotation) writer.Write(e + ",");
+            foreach (var e in ConstrainPosition1) writer.Write(e + ",");
+            foreach (var e in ConstrainPosition2) writer.Write(e + ",");
+            foreach (var e in ConstrainRotation1) writer.Write(e + ",");
+            foreach (var e in ConstrainRotation2) writer.Write(e + ",");
+            foreach (var e in SpringPosition) writer.Write(e + ",");
+            foreach (var e in SpringRotation) writer.Write(e);
+        }
     }
 }

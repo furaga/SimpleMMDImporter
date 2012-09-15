@@ -23,7 +23,12 @@ namespace SimpleMMDImporter.MMDModel
 
         public ModelMaterial(BinaryReader reader)
         {
-            DiffuseColor = new float[3];
+            Read(reader);
+        }
+
+        public void Read(BinaryReader reader)
+        {
+DiffuseColor = new float[3];
             for (int i = 0; i < DiffuseColor.Length; i++)
             {
                 DiffuseColor[i] = BitConverter.ToSingle(reader.ReadBytes(4), 0);
@@ -60,9 +65,18 @@ namespace SimpleMMDImporter.MMDModel
             }
         }
 
-        public void Read(BinaryReader reader)
+        public void Write(StreamWriter writer)
         {
-
+            foreach (var v in DiffuseColor) writer.Write(v + ",");
+            writer.Write(Alpha + ",");
+            writer.Write(Specularity + ",");
+            foreach (var v in SpecularColor) writer.Write(v + ",");
+            foreach (var v in AmbientColor) writer.Write(v + ",");
+            writer.Write(ToonIndex + ",");
+            writer.Write(EdgeFlag + ",");
+            writer.Write(FaceVertCount + ",");
+            writer.Write(TextureFileName + ",");
+            writer.Write(SphereTextureFileName + "\n");
         }
     }
 }

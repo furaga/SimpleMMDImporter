@@ -34,5 +34,14 @@ namespace SimpleMMDImporter.MMDModel
                 IKChildBoneIndex[i] = BitConverter.ToUInt16(reader.ReadBytes(2), 0);
             }
         }
+        public void Write(StreamWriter writer)
+        {
+            writer.Write(IKBoneIndex + ",");
+            writer.Write(IKTargetBoneIndex + ",");
+            writer.Write(Iterations + ",");
+            writer.Write(AngleLimit + ",");
+            foreach (var e in IKChildBoneIndex) writer.Write(e + ",");
+            writer.WriteLine();
+        }
     }
 }

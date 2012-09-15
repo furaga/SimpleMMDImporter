@@ -49,5 +49,14 @@ namespace SimpleMMDImporter.MMDModel
             Position[2] *= CoordZ;
             NormalVector[2] *= CoordZ;
         }
+
+        public void Write(StreamWriter writer)
+        {
+            foreach (var v in Position) writer.Write(v + ",");
+            foreach (var v in NormalVector) writer.Write(v + ",");
+            foreach (var v in UV) writer.Write(v + ",");
+            foreach (var v in BoneNum) writer.Write(v + ",");
+            writer.WriteLine(BoneWeight + "," + NonEdgeFlag.ToString());
+        }
     }
 }
