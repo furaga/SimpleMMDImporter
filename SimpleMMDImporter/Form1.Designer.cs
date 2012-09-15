@@ -39,25 +39,29 @@
             // 
             // textBox
             // 
-            this.textBox.Location = new System.Drawing.Point(69, 24);
+            this.textBox.Location = new System.Drawing.Point(92, 30);
+            this.textBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(254, 19);
+            this.textBox.Size = new System.Drawing.Size(337, 22);
             this.textBox.TabIndex = 0;
+            this.textBox.Text = "C:\\Users\\asukalab\\Desktop\\Lat式ミクVer2.3\\Lat式ミクVer2.3_Normal.pmd";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Location = new System.Drawing.Point(16, 36);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 12);
+            this.label1.Size = new System.Drawing.Size(64, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "ファイル名";
             // 
             // buttonConvert
             // 
-            this.buttonConvert.Location = new System.Drawing.Point(280, 51);
+            this.buttonConvert.Location = new System.Drawing.Point(373, 64);
+            this.buttonConvert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonConvert.Name = "buttonConvert";
-            this.buttonConvert.Size = new System.Drawing.Size(98, 24);
+            this.buttonConvert.Size = new System.Drawing.Size(131, 30);
             this.buttonConvert.TabIndex = 2;
             this.buttonConvert.Text = "変換";
             this.buttonConvert.UseVisualStyleBackColor = true;
@@ -65,9 +69,10 @@
             // 
             // buttonRefer
             // 
-            this.buttonRefer.Location = new System.Drawing.Point(329, 22);
+            this.buttonRefer.Location = new System.Drawing.Point(439, 28);
+            this.buttonRefer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonRefer.Name = "buttonRefer";
-            this.buttonRefer.Size = new System.Drawing.Size(49, 23);
+            this.buttonRefer.Size = new System.Drawing.Size(65, 29);
             this.buttonRefer.TabIndex = 3;
             this.buttonRefer.Text = "参照";
             this.buttonRefer.UseVisualStyleBackColor = true;
@@ -76,9 +81,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 9);
+            this.label2.Location = new System.Drawing.Point(16, 11);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(228, 12);
+            this.label2.Size = new System.Drawing.Size(282, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "pmd, vmdファイルをエクセルファイルに変換します";
             // 
@@ -88,14 +94,15 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 86);
+            this.ClientSize = new System.Drawing.Size(524, 108);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonRefer);
             this.Controls.Add(this.buttonConvert);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "SimpleMMDImporter";
             this.ResumeLayout(false);

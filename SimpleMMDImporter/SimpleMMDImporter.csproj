@@ -52,6 +52,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MMDModel\MMDModel.cs" />
+    <Compile Include="MMDModel\MMDUtils.cs" />
+    <Compile Include="MMDModel\ModelBone.cs" />
+    <Compile Include="MMDModel\ModelBoneDisp.cs" />
+    <Compile Include="MMDModel\ModelBoneDispName.cs" />
+    <Compile Include="MMDModel\ModelHeader.cs" />
+    <Compile Include="MMDModel\ModelIK.cs" />
+    <Compile Include="MMDModel\ModelJoint.cs" />
+    <Compile Include="MMDModel\ModelMaterial.cs" />
+    <Compile Include="MMDModel\ModelSkin.cs" />
+    <Compile Include="MMDModel\ModelRigidBody.cs" />
+    <Compile Include="MMDModel\ModelVertex.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

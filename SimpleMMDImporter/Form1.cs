@@ -30,9 +30,11 @@ namespace SimpleMMDImporter
             }
         }
 
+        MMDModel.MMDModel model;
+
         private void buttonConvert_Click(object sender, EventArgs e)
         {
-
+            model = new MMDModel.MMDModel(textBox.Text, 1.0f);
         }
     }
 }
