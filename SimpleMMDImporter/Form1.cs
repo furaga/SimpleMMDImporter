@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SimpleMMDImporter
 {
@@ -33,6 +34,7 @@ namespace SimpleMMDImporter
         }
 
         MMDModel.MMDModel model;
+        MMDMotion.MMDMotion motion;
 
         private void buttonConvert_Click(object sender, EventArgs e)
         {
@@ -40,12 +42,21 @@ namespace SimpleMMDImporter
             switch (saveFileDialog.ShowDialog())
             {
                 case DialogResult.OK:
-                    model = new MMDModel.MMDModel(textBox.Text, saveFileDialog.FileName, 1.0f);
+                    if (Path.GetExtension(textBox.Text).ToLower() == ".pmd")
+                    {
+                        model = new MMDModel.MMDModel(textBox.Text, saveFileDialog.FileName, 1.0f);
+                    }
+                    if (Path.GetExtension(textBox.Text).ToLower() == ".vmd")
+                    {
+                        motion = new MMDMotion.MMDMotion(textBox.Text, saveFileDialog.FileName, 1.0f);
+                    }
                     break;
                 default:
                     break;
             }
 //            Close();
         }
+
+        
     }
 }

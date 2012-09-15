@@ -43,8 +43,8 @@
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(254, 19);
             this.textBox.TabIndex = 0;
-            this.textBox.Text = "C:\\Users\\furaga\\Downloads\\MikuMikuDance_v524\\MikuMikuDance_v524\\UserFile\\Model\\La" +
-                "t式ミクVer2.3_Sailor夏服.pmd";
+            this.textBox.Text = "C:\\Users\\furaga\\Downloads\\WAVEFILE_fullver\\WAVEFILE_fullver\\wavefile_full_lat.vmd" +
+                "";
             // 
             // label1
             // 

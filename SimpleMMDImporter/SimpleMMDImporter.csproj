@@ -56,7 +56,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MMDModel\MMDModel.cs" />
-    <Compile Include="MMDModel\MMDUtils.cs" />
+    <Compile Include="MMDUtils.cs" />
     <Compile Include="MMDModel\ModelBone.cs" />
     <Compile Include="MMDModel\ModelBoneDisp.cs" />
     <Compile Include="MMDModel\ModelBoneDispName.cs" />
@@ -67,6 +67,11 @@
     <Compile Include="MMDModel\ModelSkin.cs" />
     <Compile Include="MMDModel\ModelRigidBody.cs" />
     <Compile Include="MMDModel\ModelVertex.cs" />
+    <Compile Include="MMDMotion\CameraMotionData.cs" />
+    <Compile Include="MMDMotion\FaceMotionData.cs" />
+    <Compile Include="MMDMotion\LightMotionData.cs" />
+    <Compile Include="MMDMotion\MMDMotion.cs" />
+    <Compile Include="MMDMotion\MotionData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

@@ -11,21 +11,6 @@ using DWORD = System.UInt32;
 namespace SimpleMMDImporter.MMDModel
 {
     /// <summary>
-    /// 座標系
-    /// </summary>
-    public enum CoordinateType
-    {
-        /// <summary>
-        /// 左手座標系（MMDの標準座標系）
-        /// </summary>
-        LeftHandedCoordinate = 1,
-        /// <summary>
-        /// 右手座標系（XNAの標準座標系）
-        /// </summary>
-        RightHandedCoordinate = -1
-    }
-
-    /// <summary>
     /// MMDモデル(ver.1)
     /// </summary>
     class MMDModel
@@ -76,9 +61,9 @@ namespace SimpleMMDImporter.MMDModel
                 Read(reader, Coordinate, scale);
                 if (fs.Length != fs.Position)
                 {
-                    Console.WriteLine("警告: ファイル末尾以降に不明データ?");
+                    Console.WriteLine("警告：ファイル末尾以降に不明データ?");
                 }
-
+                fs.Close();
             }
 
             using (var fs = new FileStream(outputPath, FileMode.Create))
@@ -244,7 +229,7 @@ namespace SimpleMMDImporter.MMDModel
             writer.WriteLine("\n\n物理演算拡張, " + PhysicsExpantion.ToString());
             writer.WriteLine("\n剛体リスト, " + RigidBodies.Length);
             foreach (var e in RigidBodies) e.Write(writer);
-            writer.WriteLine("\nジョイントリスト, " + Joints.Length);
+            writer.WriteLine("\n\nジョイントリスト, " + Joints.Length);
             foreach (var e in Joints) e.Write(writer);
         }
     }
